@@ -1,8 +1,8 @@
 extern crate redis;
 
-use std::error::Error;
-use redis::{Commands};
+use redis::Commands;
 use crate::message::Message;
+use std::error::Error;
 
 pub fn publish_message(message: Message) -> Result<(), Box<dyn Error>> {
     let client = redis::Client::open("redis://localhost/")?;

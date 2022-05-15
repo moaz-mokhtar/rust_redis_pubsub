@@ -1,11 +1,11 @@
+use serde::{Deserialize, Serialize};
 use uuid::Uuid;
-use serde::{Serialize, Deserialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Message {
     pub id: String,
     pub channel: String,
-    pub payload: Order
+    pub payload: Order,
 }
 
 impl Message {
@@ -13,12 +13,12 @@ impl Message {
         Message {
             id: Message::generate_id(),
             channel: String::from("order"),
-            payload
+            payload,
         }
     }
 
     fn generate_id() -> String {
-        Uuid::new_v4().to_simple().to_string()
+        Uuid::new_v4().to_string()
     }
 }
 
@@ -26,11 +26,15 @@ impl Message {
 pub struct Order {
     description: String,
     quantity: u16,
-    total_price: f32
+    total_price: f32,
 }
 
 impl Order {
     pub fn new(description: String, quantity: u16, total_price: f32) -> Order {
-        Order { description, quantity, total_price }
+        Order {
+            description,
+            quantity,
+            total_price,
+        }
     }
 }
